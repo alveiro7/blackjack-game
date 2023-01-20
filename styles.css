@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+:root {
+    --color1: #4F4F4F;
+    --color2: #828282;
+    --color3: #2F4F30;
+    --fondo1: #f2f2f2;
+    --fondo2: linear-gradient(rgba(156,39,176,.2),#fff);;
+    --blue: rgba(47, 128, 237, 0.7);;
+}
+
+body {
+    background: var(--color3);
+    color: var(--fondo1);
+}
+
+.title {
+    text-align: center;
+    padding: 20px;
+    font-size: 2.5rem;
+    background: var(--color1);
+}
+
+.card {
+    width: 150px;
+    position: relative;
+    left: 100px;
+    margin-left: -75px;
+}
+
+#computer-cards, #player-cards {
+    height: 240px
+}
