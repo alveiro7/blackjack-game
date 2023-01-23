@@ -8,6 +8,17 @@
 let deck = []
 const types = ['C', 'D', 'H', 'S']
 const specials = ['A', 'J', 'Q', 'K']
+let playerPoints = 0
+let computerPoints = 0
+
+
+
+// References to HTML
+const btnSplit = document.querySelector('#btnSplit')
+const smallPlayer = document.querySelectorAll('small')
+const divCard = document.querySelector('#player-cards')
+
+
 
 const createDeck = () => {
     for ( let i = 2; i <= 10; i++) {
@@ -53,3 +64,28 @@ const cardValue = (card) => {
 const value = cardValue(getCard())
 
 console.log({value})
+
+// Events
+btnSplit.addEventListener('click', () => {
+    const card = getCard()
+    console.log('La carta es ', card, ' y tiene ', cardValue(card), ' puntos');
+
+    playerPoints = playerPoints + cardValue(card)
+    smallPlayer[0].innerText = playerPoints
+
+    const imgCard = document.createElement('img')
+    imgCard.src = `/assets/cartas/${card}.png`
+    imgCard.classList = 'cardi'
+    divCard.append(imgCard)
+
+    if (playerPoints > 21) {
+        console.warn('Lo siento mucho perdistes');
+        btnSplit.disabled = true
+    } else if (playerPoints === 21) {
+        console.warn('Genial!!! Haz Ganado');
+        btnSplit.disabled = true
+    }
+
+    
+})
+
