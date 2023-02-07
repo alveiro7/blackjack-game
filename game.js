@@ -15,8 +15,12 @@ let computerPoints = 0
 
 // References to HTML
 const btnSplit = document.querySelector('#btnSplit')
+const btnStand = document.querySelector('#btnStand')
 const smallPlayer = document.querySelectorAll('small')
 const divCard = document.querySelector('#player-cards')
+const divCardPc = document.querySelector('#computer-cards')
+
+
 
 
 
@@ -61,9 +65,26 @@ const cardValue = (card) => {
     : value * 1
 }
 
-const value = cardValue(getCard())
+/* computer shift */
+const shiftComputer = (pointsMin) => {
+    do {
+        const card = getCard()
+        console.log('La carta es ', card, ' y tiene ', cardValue(card), ' puntos');
 
-console.log({value})
+        computerPoints = computerPoints + cardValue(card)
+        smallPlayer[1].innerText = computerPoints
+
+        const imgCard = document.createElement('img')
+        imgCard.src = `/assets/cartas/${card}.png`
+        imgCard.classList.add('cardi')
+        divCardPc.append(imgCard)
+        if ( pointsMin > 21 ) {
+            break
+        }
+
+    } while ((computerPoints < pointsMin ) && (pointsMin < 21 ))
+}
+
 
 // Events
 btnSplit.addEventListener('click', () => {
@@ -75,17 +96,27 @@ btnSplit.addEventListener('click', () => {
 
     const imgCard = document.createElement('img')
     imgCard.src = `/assets/cartas/${card}.png`
-    imgCard.classList = 'cardi'
+    imgCard.classList.add('cardi')
     divCard.append(imgCard)
 
     if (playerPoints > 21) {
         console.warn('Lo siento mucho perdistes');
+        shiftComputer(playerPoints)
         btnSplit.disabled = true
+        btnStand.disabled = true
+
     } else if (playerPoints === 21) {
         console.warn('Genial!!! Haz Ganado');
         btnSplit.disabled = true
-    }
+        btnStand.disabled = true
 
-    
+    }
 })
+
+btnStand.addEventListener('click', () => {
+    btnSplit.disabled = true
+    btnStand.disabled = true
+    shiftComputer(playerPoints)
+
+} )
 
