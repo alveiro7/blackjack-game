@@ -14,6 +14,7 @@ let computerPoints = 0
 
 
 // References to HTML
+const btnNew = document.querySelector('#btnNew')
 const btnSplit = document.querySelector('#btnSplit')
 const btnStand = document.querySelector('#btnStand')
 const smallPlayer = document.querySelectorAll('small')
@@ -83,6 +84,14 @@ const shiftComputer = (pointsMin) => {
         }
 
     } while ((computerPoints < pointsMin ) && (pointsMin < 21 ))
+
+    setTimeout( () => {
+        if (computerPoints === pointsMin ) alert('DEUCESS ')
+        else if (pointsMin > 21 ) alert('GAME OVER')
+        else if (computerPoints > 21) alert('WINNER!!!')
+        else if (playerPoints === 21) alert('WINNER°°°')
+        else alert('GAME OVER°°°')
+    }, 100)
 }
 
 
@@ -118,5 +127,23 @@ btnStand.addEventListener('click', () => {
     btnStand.disabled = true
     shiftComputer(playerPoints)
 
+} )
+
+btnNew.addEventListener('click', () => {
+    console.clear()
+    deck = []
+    deck = createDeck()
+
+    playerPoints = 0
+    computerPoints = 0
+
+    smallPlayer[0].innerText = '0'
+    smallPlayer[1].innerText = '0'
+
+    divCard.innerHTML = ''
+    divCardPc.innerHTML = ''
+
+    btnSplit.disabled = false
+    btnStand.disabled = false
 } )
 
